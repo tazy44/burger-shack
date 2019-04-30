@@ -4,8 +4,8 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = props => {
   //Extracting all the keys of the ingredients object into an Array
-  let transformedIngredeints = Object.keys(props.ingredients).map(
-    ingredientKey => {
+  let transformedIngredeints = Object.keys(props.ingredients)
+    .map(ingredientKey => {
       //Looping on every ingredientKey
       return [...Array(props.ingredients[ingredientKey])].map((_, i) => {
         //Looping as many times as the value of each ingredientKey
@@ -13,8 +13,13 @@ const burger = props => {
           <BurgerIngredient key={ingredientKey + i} type={ingredientKey} />
         );
       });
-    }
-  );
+    })
+    //reducing the multidimensional array into a single one
+    .reduce((arr, el) => arr.concat(el), []);
+
+  if (transformedIngredeints.length <= 0) {
+    transformedIngredeints = <p>Please, start adding ingredients!</p>;
+  }
 
   return (
     <div className={Classes.Burger}>
