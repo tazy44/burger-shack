@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/BuildControls/BuildControls';
+import Modal from '../../components/Modal/Modal';
+import OrderSummary from '../../components/Modal/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
   meat: 1.5,
@@ -13,8 +15,8 @@ class BurgerBuilder extends Component {
   state = {
     ingredients: {
       salad: 0,
-      cheese: 0,
       bacon: 0,
+      cheese: 0,
       meat: 0
     },
     totalPrice: 0.2,
@@ -60,18 +62,21 @@ class BurgerBuilder extends Component {
   };
 
   render() {
+    //creating an identical object of the ingredients with values of true or false,
+    //based on each ingredient's quantity to enable/diable the subtraction button
     const disabledInfo = {
       ...this.state.ingredients
     };
 
-    //creating an identical object of the ingredients with values of true or false,
-    //based on each ingredient's quantity to enable/diable the subtraction button
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
 
     return (
       <Fragment>
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           addIngredient={this.addIngredientHandler}
@@ -79,6 +84,7 @@ class BurgerBuilder extends Component {
           disabledInfo={disabledInfo}
           price={this.state.totalPrice}
           purchasable={this.state.purchasable}
+          counter={this.state.ingredients}
         />
       </Fragment>
     );

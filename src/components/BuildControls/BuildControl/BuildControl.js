@@ -14,6 +14,7 @@ const buildControl = props => (
     >
       Less
     </button>
+    <div className={Classes.Label}>{props.counter}</div>
   </div>
 );
 

@@ -21,6 +21,7 @@ const buildControls = props => (
         addIngredient={() => props.addIngredient(control.type)}
         removeIngredient={() => props.removeIngredient(control.type)}
         disabledInfo={props.disabledInfo[control.type]}
+        counter={props.counter[control.type]}
       />
     ))}
 
