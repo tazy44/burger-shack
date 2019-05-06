@@ -14,11 +14,14 @@ const orderSummary = props => {
       <h3>Are you sure you want to proceed with the following order?</h3>
       <p>You ordered a delicious sandwitch with the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
+      <p>
+        <strong>Total price: {props.price.toFixed(2)}$</strong>
+      </p>
       <Button btnType="Danger" clicked={props.purchaseCancelled}>
-        Cancel
+        NO
       </Button>
       <Button btnType="Success" clicked={props.purchaseContinued}>
-        CONTINUE
+        YES
       </Button>
     </Fragment>
   );

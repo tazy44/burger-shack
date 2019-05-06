@@ -5,7 +5,6 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 function App() {
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>Burger Shak Under Construction</h1>
       <Layout>
         <BurgerBuilder />
       </Layout>
