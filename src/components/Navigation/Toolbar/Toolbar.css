@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #5fb59f;
+  background-color: #a34f1b;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,4 +15,17 @@
 
 .Toolbar nav {
   height: 100%;
+}
+
+@media (max-width: 499px) {
+  .DesktopOnly {
+    display: none;
+  }
+}
+
+.Menu {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  color: #40a4c8;
 }
