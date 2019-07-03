@@ -3,6 +3,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/BuildControls/BuildControls';
 import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/Modal/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 const INGREDIENT_PRICES = {
   meat: 1.5,
@@ -72,12 +73,26 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     this.setState({ purchasing: false });
-    alert('Your order has been submitted successfully!');
+    //alert('Your order has been submitted successfully!');
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'Kevin Hart',
+        address: '34 BV, Hollywood',
+        phoneNumber: '+35558873',
+        email: 'Kev.H@gmial.com'
+      }
+    };
+    axios
+      .post('/orders.json', order)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   render() {
     //creating an identical object of the ingredients with values of true or false,
-    //based on each ingredient's quantity to enable/diable the subtraction button
+    //based on each ingredient's quantity to enable/disable the subtraction button
     const disabledInfo = {
       ...this.state.ingredients
     };
