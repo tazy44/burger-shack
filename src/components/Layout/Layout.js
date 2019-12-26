@@ -2,7 +2,8 @@ import React, { Fragment, Component } from 'react';
 import Classes from './Layout.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import Sidedrawer from '../Navigation/SideDrawer/SideDrawer';
-import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder';
+// import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder';
+// import Checkout from '../../containers/Checkout/Checkout';
 
 class Layout extends Component {
   state = {
@@ -25,7 +26,7 @@ class Layout extends Component {
           open={this.state.showSideDrawer}
           closed={this.sideDrawerClosedHandler}
         />
-        <main className={Classes.main}><BurgerBuilder /></main>
+        <main className={Classes.main}>{this.props.children}</main>
       </Fragment>
     );
   }
