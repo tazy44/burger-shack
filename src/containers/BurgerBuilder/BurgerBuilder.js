@@ -16,17 +16,24 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
+    ingredients: null,
     totalPrice: 0.2,
     purchasable: false,
     purchasing: false, //To control the visibility of the Modal
-    loading: false
+    loading: false,
+    loadingIngredientsError: false
   };
+
+  componentDidMount() {
+    axios
+      .get('https://react-burger-shack.firebaseio.com/ingredients.json')
+      .then(response => {
+        this.setState({ ingredients: response.data });
+      })
+      .catch(error => {
+        this.setState({ loadingIngredientsError: true });
+      });
+  }
 
   updatePurchaseState(ingredients) {
     const sum = Object.keys(ingredients)
@@ -120,7 +127,7 @@ class BurgerBuilder extends Component {
       orderSummary = <Spinner />;
     }
 
-    return (
+    let burger = (
       <Fragment>
         <Modal
           show={this.state.purchasing}
@@ -138,6 +145,19 @@ class BurgerBuilder extends Component {
           counter={this.state.ingredients}
           ordered={this.purchaseHandler}
         />
+      </Fragment>
+    );
+
+    return this.state.ingredients ? (
+      burger
+    ) : this.state.loadingIngredientsError ? (
+      <h1 style={{ color: 'red', textAlign: 'center' }}>
+        There's a network error. Check your interent connection
+      </h1>
+    ) : (
+      <Fragment>
+        <Spinner></Spinner>
+        <h1 style={{ textAlign: 'center' }}>Loading...</h1>
       </Fragment>
     );
   }
