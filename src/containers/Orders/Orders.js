@@ -20,7 +20,6 @@ class Orders extends Component {
         for (let key in res.data) {
           fetchedOrdersArr.push({ ...res.data[key], id: key });
         }
-        console.log(fetchedOrdersArr);
         this.setState({ orders: fetchedOrdersArr });
       })
       .catch(err => {
