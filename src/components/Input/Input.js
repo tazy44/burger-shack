@@ -56,10 +56,16 @@ const input = props => {
       break;
   }
 
+  let error = <p style={{ color: 'red' }}>Input is incorrect</p>;
+  if (props.errorMessage) {
+    error = <p style={{ color: 'red' }}>{props.errorMessage}</p>;
+  }
+
   return (
     <div className={Classes.Input}>
       <label className={Classes.Label}>{props.label}</label>
       {inputElement}
+      {props.invalid && props.touched ? error : null}
     </div>
   );
 };

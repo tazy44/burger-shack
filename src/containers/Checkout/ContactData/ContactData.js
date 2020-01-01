@@ -10,6 +10,8 @@ class ContactData extends Component {
     orderForm: {
       name: {
         elementType: 'input',
+        label: 'Your Name',
+        errorMessage: 'Your name should consist of 1 to 16 characters',
         elementConfig: {
           type: 'text',
           placeholder: 'Your Name'
@@ -25,6 +27,8 @@ class ContactData extends Component {
 
       street: {
         elementType: 'input',
+        label: 'Your street',
+        errorMessage: '',
         elementConfig: {
           type: 'text',
           placeholder: 'Street'
@@ -39,6 +43,8 @@ class ContactData extends Component {
 
       zipCode: {
         elementType: 'input',
+        label: 'Your ZIP code',
+        errorMessage: 'You have to enter 5 characters',
         elementConfig: {
           type: 'text',
           placeholder: 'ZIP Code'
@@ -55,9 +61,11 @@ class ContactData extends Component {
 
       country: {
         elementType: 'input',
+        label: 'Your Country',
+        errorMessage: '',
         elementConfig: {
           type: 'text',
-          placeholder: 'Your Country'
+          placeholder: 'Country'
         },
         value: '',
         validation: {
@@ -69,9 +77,11 @@ class ContactData extends Component {
 
       email: {
         elementType: 'input',
+        label: 'Your E-mail address',
+        errorMessage: '',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your E-mail'
+          placeholder: 'E-mail address'
         },
         value: '',
         validation: {
@@ -83,13 +93,15 @@ class ContactData extends Component {
 
       deliveryMethod: {
         elementType: 'select',
+        label: 'Your Delivery method',
+        errorMessage: '',
         elementConfig: {
           options: [
-            { value: 'fastest', displayValue: 'Fastest' },
-            { value: 'normal', displayValue: 'Normal' }
+            { value: 'fast', displayValue: 'Fast Delivery' },
+            { value: 'normal', displayValue: 'Normal Delivery' }
           ]
         },
-        value: '',
+        value: 'fast',
         validation: {
           required: false
         },
@@ -182,6 +194,7 @@ class ContactData extends Component {
             changed={event => this.inputChangedHandler(event, formElement.id)}
             invalid={!formElement.config.valid}
             touched={formElement.config.touched}
+            errorMessage={formElement.config.errorMessage}
           />
         ))}
         <Button btnType="Success" disabled={!this.state.formIsValid}>
